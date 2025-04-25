@@ -1,0 +1,94 @@
+# Twitter Clone Server
+
+Backend API server for Twitter clone application built with Express, Prisma, and TypeScript.
+
+## Features
+
+- Authentication with Supabase
+- User management (profiles, following)
+- Tweet creation, media uploads
+- Like functionality
+- Prisma ORM for database operations
+
+## Setup
+
+### Prerequisites
+
+- Node.js (v14+)
+- npm or pnpm
+- A Supabase account with project setup
+
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+
+```bash
+cd twitter-server
+npm install
+# or with pnpm
+pnpm install
+```
+
+3. Install type definitions for multer:
+
+```bash
+npm install --save-dev @types/multer
+# or with pnpm
+pnpm add -D @types/multer
+```
+
+4. Create a `.env` file in the project root with the following variables:
+
+```
+DATABASE_URL="your-prisma-db-connection-string"
+NEXT_PUBLIC_SUPABASE_URL="your-supabase-url"
+NEXT_PUBLIC_SUPABASE_ANON_KEY="your-supabase-anon-key"
+PORT=5000
+```
+
+5. Run Prisma migrations:
+
+```bash
+npx prisma migrate dev
+```
+
+### Running the server
+
+Development mode:
+
+```bash
+npm run dev
+# or with pnpm
+pnpm dev
+```
+
+Production build:
+
+```bash
+npm run build
+npm start
+# or with pnpm
+pnpm build
+pnpm start
+```
+
+## API Endpoints
+
+- **Authentication**
+
+  - POST `/api/auth/user` - Create or get user after Supabase auth
+  - GET `/api/auth/me` - Get current user info (protected)
+
+- **Users**
+
+  - GET `/api/users/:username` - Get user profile
+  - PUT `/api/users/profile` - Update user profile (protected)
+  - POST `/api/users/follow/:userId` - Follow a user (protected)
+  - PUT `/api/users/profile-picture` - Update profile picture (protected)
+
+- **Tweets**
+  - GET `/api/tweets` - Get tweet feed
+  - GET `/api/tweets/user/:username` - Get user tweets
+  - POST `/api/tweets` - Create a tweet (protected)
+  - POST `/api/tweets/:id/like` - Like/unlike a tweet (protected)
