@@ -11,8 +11,12 @@ COPY package.json pnpm-lock.yaml* ./
 
 # Install dependencies
 RUN pnpm install 
+
 # Copy source code
 COPY . .
+
+# Install needed type definitions
+RUN pnpm add -D @types/cors
 
 # Generate Prisma client
 RUN pnpx prisma generate
@@ -32,7 +36,7 @@ COPY --from=base /app/package.json ./package.json
 COPY --from=base /app/prisma ./prisma
 
 # Expose the port the app runs on
-EXPOSE 3000
+EXPOSE 5000
 
 # Command to run the application
 CMD ["node", "dist/server.js"] 
