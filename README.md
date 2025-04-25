@@ -73,6 +73,40 @@ pnpm build
 pnpm start
 ```
 
+## Deployment
+
+To deploy the application:
+
+1. Build the TypeScript code:
+
+```bash
+npm run build
+# or
+pnpm build
+```
+
+2. Generate Prisma client:
+
+```bash
+npx prisma generate
+```
+
+3. Make sure your production environment has the necessary environment variables set.
+
+4. Start the server:
+
+```bash
+npm start
+# or
+pnpm start
+```
+
+For platforms like Heroku or Railway, make sure to:
+
+- Set all environment variables in the platform's dashboard
+- Add a Procfile or ensure the start script is correctly configured
+- Configure the database connection string for production
+
 ## API Endpoints
 
 - **Authentication**
