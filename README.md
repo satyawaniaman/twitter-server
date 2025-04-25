@@ -75,6 +75,8 @@ pnpm start
 
 ## Deployment
 
+### Standard Deployment
+
 To deploy the application:
 
 1. Build the TypeScript code:
@@ -106,6 +108,36 @@ For platforms like Heroku or Railway, make sure to:
 - Set all environment variables in the platform's dashboard
 - Add a Procfile or ensure the start script is correctly configured
 - Configure the database connection string for production
+
+### Docker Deployment
+
+This project includes a Dockerfile for containerized deployment:
+
+1. Build the Docker image:
+
+```bash
+docker build -t twitter-server .
+```
+
+2. Run the container:
+
+```bash
+docker run -p 5000:5000 --env-file .env twitter-server
+```
+
+For production environments:
+
+```bash
+# Build the image
+docker build -t twitter-server:production .
+
+# Run with environment variables
+docker run -d -p 5000:5000 \
+  -e DATABASE_URL="your-db-url" \
+  -e NEXT_PUBLIC_SUPABASE_URL="your-supabase-url" \
+  -e NEXT_PUBLIC_SUPABASE_ANON_KEY="your-supabase-key" \
+  twitter-server:production
+```
 
 ## API Endpoints
 
